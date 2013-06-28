@@ -1,1 +1,130 @@
-the first file
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<html>
+<head>
+    <title>Web3D plugin performance test</title>
+    <meta content="text/html;charset=utf-8">
+
+    <script type="text/javascript">
+        var plugin;
+        var qingdao_layer;
+        var beijing_layer;
+
+        function onLoad() {
+            plugin = document.getElementById('PluginControl');
+            plugin.invoke("-1", "createMap", "", null);
+            update();
+
+            //world image
+            addArcGISTiledMapServiceLayer('{"url":"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer"}');
+            // qingdao
+            //qingdao_layer = addfeature3dLayer('{"url":"http://10.112.18.131/ArcGIS/rest/services/SanFrancisco/3DFeatureServer/qingdao"}'); 
+
+            //Beijing
+            beijing_layer = addfeature3dLayer('{"url":"http://10.112.18.28/ArcGIS/rest/services/SanFrancisco/3DFeatureServer/beijing2"}'); 
+
+            //playpath();
+            flyTo();
+        };
+
+
+        var previous_loaded_features = 0;
+        var previous_loaded_textures = 0;
+        var previous_loaded_triangles = 0;
+        function update() {
+  		var start = new Date().getTime();
+            plugin.invoke("-1", "updateFrame", "", null);
+            var end = new Date().getTime();
+			var rendering_time = end - start;
+			
+            var str = plugin.invoke("-1", "getProfileInfo","",null);
+            var profileinfo = eval("(" + str + ")");
+            //console.log(profileinfo);
+			
+            var frameid = profileinfo.frame.number;
+            var fps = profileinfo.fps; //including api usage time
+            var current_features = profileinfo.feature.current;
+            var total_loaded_features = profileinfo.feature.loaded; 
+            var updated_features = total_loaded_features - previous_loaded_features;
+            var current_triangles = profileinfo.triangle.current;
+            var total_loaded_triangles = profileinfo.triangle.loaded;
+            var updated_triangles = total_loaded_triangles - previous_loaded_triangles;
+            var triangles_in_current_view = profileinfo.triangle.draw;
+            var current_textures = profileinfo.texture.current;
+            var total_loaded_textures = profileinfo.texture.loaded; 
+            var updated_textures = total_loaded_textures - previous_loaded_textures;
+            
+            console.log(frameid + "," + start + "," + end + "," + rendering_time + "," + Math.round(1000/rendering_time) + "," + fps +"," + current_features + "," + total_loaded_features + "," + updated_features + "," + current_triangles + "," + total_loaded_triangles + "," + updated_triangles + "," + triangles_in_current_view + "," + current_textures + "," + total_loaded_textures + "," + updated_textures + ","); 
+           
+/*
+            console.log("frame id " + frameid + ", start time: " + start + ", end time: " + end + ", rendering time: " + rendering_time + " ms" +  ", core_fps: " + Math.round(1000/rendering_time) + ", fps: " + fps);
+            
+            console.log("current features in memory: " + current_features + ", total loaded features: " + total_loaded_features + ", updated features: " + updated_features + ", current triangles in memory: " + current_triangles + ", total loaded triangles: " + total_loaded_triangles + ", updated triangles: " + updated_triangles + ", triangles in current view: " + triangles_in_current_view + ", current textures in memory: " + current_textures + ", total loaded textures: " + total_loaded_textures + ", updated textures: " + updated_textures); 
+*/
+            previous_loaded_features = total_loaded_features;
+            previous_loaded_textures = total_loaded_textures;
+            previous_loaded_triangles = total_loaded_triangles;
+
+			setTimeout(update,30);
+        }
+
+        function addArcGISTiledMapServiceLayer(url) {
+            var strmap = plugin.invoke("-1", "createArcGISTiledMapServiceLayer", url, null);
+            strmap = eval("(" + strmap + ")");
+            var ret = plugin.invoke("-1", "addLayer", json2str(strmap.data), null);
+            return strmap.data.layerId;
+        }
+
+        function addfeature3dLayer(url) {
+            var strmap = plugin.invoke("-1", "createFeature3dLayer", url, null);
+            strmap = eval("(" + strmap + ")");
+            var ret = plugin.invoke("-1", "addLayer", json2str(strmap.data), null);
+            return strmap.data.layerId;
+        }
+
+        function flyTo(){
+            //qingdao
+            //plugin.invoke("-1", "flyTo", '{"lookat":{"heading":67.70454768832053,"spatialReference":{"wkid":4326},"tilt":72.7695177332167,"x":120.2831701888085,"y":36.05334205405887,"z":186.3187375962734},"milliseconds":2000}', null);
+
+            //qingdao
+            //plugin.invoke("-1","flyTo",'{"lookat":{"heading":64.30598808856568,"spatialReference":{"wkid":4326},"tilt":72.98728264971997,"x":120.3196002967442,"y":36.07828078315619,"z":434.1009480003268},"milliseconds":4000}',null);
+
+            //qingdao
+            //plugin.invoke("-1","flyTo",'{"lookat":{"heading":64.30598808856568,"spatialReference":{"wkid":4326},"tilt":12.98728264971997,"x":120.3196002967442,"y":36.07828078315619,"z":20134.1009480003268},"milliseconds":4000}',null);
+
+            //beijing
+            plugin.invoke("-1","flyTo",'{"lookat":{"heading":1.04313202231546,"spatialReference":{"wkid":4326},"tilt":63.80111942372177,"x":116.3909133830441,"y":39.9103452976208,"z":118.8980882251635},"milliseconds":2000}',null);
+        }
+
+        function playpath() {
+
+                //plugin.invoke("-1", "playpath", '{"path":[{"lookat":{"heading":67.70454768832053,"spatialReference":{"wkid":4326},"tilt":72.7695177332167,"x":120.2831701888085,"y":36.05334205405887,"z":186.3187375962734},"milliseconds":20000}],"mode":"loop"}', null);
+                
+                plugin.invoke("-1", "playpath", '{"path":[{"lookat":{"heading":67.70454768832053,"spatialReference":{"wkid":4326},"tilt":72.7695177332167,"x":120.2831701888085,"y":36.05334205405887,"z":186.3187375962734},"milliseconds":20000},{"lookat":{"heading":67.71070033061335,"spatialReference":{"wkid":4326},"tilt":72.76951773321666,"x":120.2936236836437,"y":36.06659162421818,"z":186.3187375972047},"milliseconds":20000},{"lookat":{"heading":67.72324376984213,"spatialReference":{"wkid":4326},"tilt":72.76951773321665,"x":120.314926490388,"y":36.08425267396858,"z":186.31873760093},"milliseconds":20000},{"lookat":{"heading":67.72942103480746,"spatialReference":{"wkid":4326},"tilt":72.76951773321653,"x":120.3254132615406,"y":36.10537392970567,"z":186.3187376046553},"milliseconds":20000},{"lookat":{"heading":67.73018518860363,"spatialReference":{"wkid":4326},"tilt":72.76951773321655,"x":120.3267122250582,"y":36.12156183417404,"z":186.3187375999987},"milliseconds":20000},{"lookat":{"heading":113.2784294609212,"spatialReference":{"wkid":4326},"tilt":72.76951773321657,"x":120.3406962505728,"y":36.13803855026569,"z":186.3187376074493},"milliseconds":20000},{"lookat":{"heading":133.0930070384645,"spatialReference":{"wkid":4326},"tilt":72.77117339207123,"x":120.3654142672702,"y":36.14707430897042,"z":129.1601972132921},"milliseconds":20000},{"lookat":{"heading":119.2380656151279,"spatialReference":{"wkid":4326},"tilt":72.77117339207115,"x":120.3739904484759,"y":36.15079155870146,"z":129.1601972188801},"milliseconds":20000},{"lookat":{"heading":119.244040603888,"spatialReference":{"wkid":4326},"tilt":72.77117339207115,"x":120.3841192226442,"y":36.15353956395724,"z":129.1601972235367},"milliseconds":20000},{"lookat":{"heading":119.2512115747474,"spatialReference":{"wkid":4326},"tilt":72.77117339207109,"x":120.3962746998647,"y":36.15996452177398,"z":129.1601972291246},"milliseconds":20000},{"lookat":{"heading":119.2495428905428,"spatialReference":{"wkid":4326},"tilt":72.77117339207103,"x":120.3934481360423,"y":36.1686308520191,"z":129.1601972486824},"milliseconds":20000},{"lookat":{"heading":119.242804228129,"spatialReference":{"wkid":4326},"tilt":72.77117339207118,"x":120.3820318206508,"y":36.17730621062808,"z":129.1601972430944},"milliseconds":20000},{"lookat":{"heading":119.2341217966197,"spatialReference":{"wkid":4326},"tilt":72.77117339207123,"x":120.3673232700972,"y":36.18105399366441,"z":129.1601972449571},"milliseconds":20000},{"lookat":{"heading":119.2378355393605,"spatialReference":{"wkid":4326},"tilt":72.7711733920713,"x":120.3736145997338,"y":36.19363422792955,"z":129.1601972449571},"milliseconds":20000},{"lookat":{"heading":119.2425847313268,"spatialReference":{"wkid":4326},"tilt":72.77117339207125,"x":120.3816568649392,"y":36.19940821618485,"z":129.1601972449571},"milliseconds":20000},{"lookat":{"heading":119.2534769604718,"spatialReference":{"wkid":4326},"tilt":72.77117339207133,"x":120.4001013967887,"y":36.18844422640753,"z":129.1601972468197},"milliseconds":20000},{"lookat":{"heading":119.2580896504373,"spatialReference":{"wkid":4326},"tilt":72.77117339207128,"x":120.4079141571895,"y":36.18055638824279,"z":129.1601972412318},"milliseconds":20000},{"lookat":{"heading":119.2616806978461,"spatialReference":{"wkid":4326},"tilt":72.77117339207123,"x":120.4139972556304,"y":36.17292194210147,"z":129.1601972412318},"milliseconds":20000},{"lookat":{"heading":119.2571261271742,"spatialReference":{"wkid":4326},"tilt":72.77117339207123,"x":120.406275279662,"y":36.1598100722874,"z":129.1601972403005},"milliseconds":20000},{"lookat":{"heading":119.2551750387751,"spatialReference":{"wkid":4326},"tilt":72.77117339207122,"x":120.4029662307352,"y":36.14856926989788,"z":129.1601972403005},"milliseconds":20000},{"lookat":{"heading":119.6175394899572,"spatialReference":{"wkid":4326},"tilt":72.77322337957197,"x":120.4069748123687,"y":36.14072344113406,"z":58.39699334278703},"milliseconds":20000},{"lookat":{"heading":100.8996698988173,"spatialReference":{"wkid":4326},"tilt":72.77322337957202,"x":120.4105873427292,"y":36.13518145210737,"z":58.39699334744364},"milliseconds":20000},{"lookat":{"heading":78.02645897806885,"spatialReference":{"wkid":4326},"tilt":72.53410991300603,"x":-122.4332262483758,"y":37.78094658795607,"z":602.2234061993659},"milliseconds":20000},{"lookat":{"heading":78.02681663674048,"spatialReference":{"wkid":4326},"tilt":72.53410991300602,"x":-122.4326379637428,"y":37.7904769161521,"z":602.2234061993659},"milliseconds":20000},{"lookat":{"heading":78.04001035066493,"spatialReference":{"wkid":4326},"tilt":72.53410991300602,"x":-122.4111069078711,"y":37.80029732331639,"z":602.2234061993659},"milliseconds":20000},{"lookat":{"heading":78.0452130931566,"spatialReference":{"wkid":4326},"tilt":72.53410991300603,"x":-122.4026254027884,"y":37.78300608370244,"z":602.2234062012285},"milliseconds":20000},{"lookat":{"heading":78.03913759068477,"spatialReference":{"wkid":4326},"tilt":72.53410991300599,"x":-122.4125515208851,"y":37.7631985678029,"z":602.2234061956406},"milliseconds":20000},{"lookat":{"heading":78.04646820654091,"spatialReference":{"wkid":4326},"tilt":72.534109913006,"x":-122.4005859325592,"y":37.7489366009258,"z":602.2234061937779},"milliseconds":20000},{"lookat":{"heading":78.0364445231769,"spatialReference":{"wkid":4326},"tilt":72.534109913006,"x":-122.4169690747229,"y":37.7322120762705,"z":602.2234061919153},"milliseconds":20000},{"lookat":{"heading":78.02023814909592,"spatialReference":{"wkid":4326},"tilt":72.534109913006,"x":-122.443454517931,"y":37.72583659985507,"z":602.2234061900526},"milliseconds":20000},{"lookat":{"heading":78.00399339387673,"spatialReference":{"wkid":4326},"tilt":72.534109913006,"x":-122.470004766834,"y":37.72148617242838,"z":602.2234061891213},"milliseconds":20000},{"lookat":{"heading":77.99294473008683,"spatialReference":{"wkid":4326},"tilt":72.53410991300602,"x":-122.4880708591756,"y":37.71004362814006,"z":602.2234061937779},"milliseconds":20000},{"lookat":{"heading":77.97101138256492,"spatialReference":{"wkid":4326},"tilt":72.53410991300602,"x":-122.5239237720195,"y":37.71404087244429,"z":602.2234061956406},"milliseconds":20000},{"lookat":{"heading":77.97498622584796,"spatialReference":{"wkid":4326},"tilt":72.53410991300603,"x":-122.5174191106511,"y":37.73048830259719,"z":602.2234061947092},"milliseconds":20000},{"lookat":{"heading":77.98729469939104,"spatialReference":{"wkid":4326},"tilt":72.53410991300602,"x":-122.4973048557953,"y":37.74200868886837,"z":602.2234061937779},"milliseconds":20000},{"lookat":{"heading":77.96470622142311,"spatialReference":{"wkid":4326},"tilt":72.53410991300603,"x":-122.5341964431229,"y":37.75746025297996,"z":602.2234061919153},"milliseconds":20000},{"lookat":{"heading":77.98483531353116,"spatialReference":{"wkid":4326},"tilt":72.53410991300606,"x":-122.5013230531472,"y":37.78418978112795,"z":602.2234061965719},"milliseconds":20000},{"lookat":{"heading":77.42035833300062,"spatialReference":{"wkid":4326},"tilt":23.20033448464493,"x":-123.1296156327987,"y":37.67499811954454,"z":135957.0328592472},"milliseconds":20000},{"lookat":{"heading":77.43298662010694,"spatialReference":{"wkid":4326},"tilt":23.20033448464495,"x":-123.0957350161422,"y":38.7175295713977,"z":135957.0328592435},"milliseconds":20000},{"lookat":{"heading":77.82961484408548,"spatialReference":{"wkid":4326},"tilt":23.2003344846449,"x":-122.4526176112006,"y":39.57986333058859,"z":135957.0328592416},"milliseconds":20000},{"lookat":{"heading":77.19313932874938,"spatialReference":{"wkid":4326},"tilt":20.22469495243393,"x":-123.3540528452107,"y":42.63743506613346,"z":1045032.835179498},"milliseconds":20000},{"lookat":{"heading":81.48663986353804,"spatialReference":{"wkid":4326},"tilt":20.22469495243389,"x":-117.0344015895609,"y":42.15066802229783,"z":1045032.835179498},"milliseconds":20000},{"lookat":{"heading":87.57865564513259,"spatialReference":{"wkid":4326},"tilt":20.22469495243393,"x":-107.8091109400581,"y":39.42054243153449,"z":1045032.8351795},"milliseconds":20000},{"lookat":{"heading":92.81992180585478,"spatialReference":{"wkid":4326},"tilt":20.224694952434,"x":-99.22690804847787,"y":33.20811885011376,"z":1045032.835179503},"milliseconds":20000},{"lookat":{"heading":96.94706126905913,"spatialReference":{"wkid":4326},"tilt":20.22469495243402,"x":-91.75896885656863,"y":36.29895101730246,"z":1045032.835179502},"milliseconds":20000},{"lookat":{"heading":105.5364034633395,"spatialReference":{"wkid":4326},"tilt":20.224694952434,"x":-77.97640244455252,"y":43.24092702911057,"z":1045032.835179501},"milliseconds":20000},{"lookat":{"heading":326.2384569328676,"spatialReference":{"wkid":4326},"tilt":5.316823757442314,"x":156.7357649169805,"y":80.41589311055823,"z":21315880.64579656},"milliseconds":20000},{"lookat":{"heading":170.4727412053188,"spatialReference":{"wkid":4326},"tilt":0.03357811996133518,"x":101.1640836845231,"y":35.04875355318591,"z":17396107.3283226},"milliseconds":20000}],"mode":"loop"}', null);
+        }
+
+        function json2str(o) {
+            var arr = [];
+            var fmt = function (s) {
+                if (typeof s == 'object' && s != null) return json2str(s);
+                return /^(string)$/.test(typeof s) ? '"' + s + '"' : s;
+            }
+
+            if (Object.prototype.toString.call(o) === '[object Array]') {
+                for (var i in o) arr.push(fmt(o[i]));
+                return '[' + arr.join(',') + ']';
+            }
+
+            for (var i in o) arr.push('"' + i + '":' + fmt(o[i]));
+            return '{' + arr.join(',') + '}';
+        }
+
+    </script>
+</head>
+
+<body onload="onLoad()" style="width:100%;height:100%">
+    <object id="PluginControl" type="application/x-esriWebPlugin" width="100%" height="100%">
+    </object>
+</body>
+</html>
