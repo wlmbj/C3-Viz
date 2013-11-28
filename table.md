@@ -1,6 +1,6 @@
-Header 1 | Header  2| Header 2 |
- ------------ | :-----------: | -----------: |
-Content 1      |          *Spanning Cell*        ||
-Content  2     |   **Cell Bold**    |         Cell |
-New section   |     More      |         Data |
-And more      |            And more          |
+Attribute	|Type	|Description	|Required	|Default|
+-----------| :--: | -------: | ------: | -----: |
+theme | Object	| Theme | has two properties:
+•	Name: 
+•	Styles: all styles of the theme. The viewer will use the first style
+If omitted, the viewer will not load theme.	 | N	||
