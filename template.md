@@ -1,5 +1,8 @@
 ## Basemap Gallery ##
 ### `basemaps` ###
+- Type: []
+- Optional; 
+- Default:   
 An array of user-defined basemaps to display in the BasemapGallery.
 
 ```json
@@ -20,7 +23,3 @@ An array of user-defined basemaps to display in the BasemapGallery.
       "url": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
     }]
 ```
-- Type: []
-- Optional; 
-- Default:   
-- Description: 
