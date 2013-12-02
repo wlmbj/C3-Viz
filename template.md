@@ -3,6 +3,7 @@
 An array of user-defined basemaps to display in the BasemapGallery.
 
 '''
+
 "basemaps": [{
     "layers": [{
       "url": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"
@@ -19,6 +20,7 @@ An array of user-defined basemaps to display in the BasemapGallery.
     "layers": [{
       "url": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
     }]
+    
 '''
 - Type: []
 - Optional; 
