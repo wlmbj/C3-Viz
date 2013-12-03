@@ -1,6 +1,7 @@
 ## Basemap Gallery ##
 ### `basemaps` ###
 - Type: []
+- - type1
 - Optional; 
 - Default:   
 An array of user-defined basemaps to display in the BasemapGallery.
