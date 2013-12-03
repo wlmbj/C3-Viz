@@ -1,22 +1,22 @@
-## [WIDGET NAME[ ##
+## [WIDGET NAME] ##
 ### Overview ###
-WIDGET DESCTIPTIONS HERE
+[WIDGET DESCTIPTIONS HERE[
 
 ### Attributes ###
-* `<ATTRIBUTE NAME 1>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
+* `[ATTRIBUTE NAME 1]`: [TYPE]; [optional / required]; default: [DEFAULT VALUE]; [ATTRIBUTE DESCRIPTIONS]
 
-  * `<SUB ATTRIBUTE NAME 1>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
-  * `<SUB ATTRIBUTE NAME 2>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
+  * `[SUB ATTRIBUTE NAME 1]`: [TYPE]; [optional / required]; default: [DEFAULT VALUE]; [ATTRIBUTE DESCRIPTIONS]
+  * `[SUB ATTRIBUTE NAME 2]`: [TYPE]; [optional / required]; default: [DEFAULT VALUE]; [ATTRIBUTE DESCRIPTIONS]
   * 
-  * `<SUB ATTRIBUTE NAME N>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
+  * `[SUB ATTRIBUTE NAME N]`: [TYPE]; [optional / required]; default: [DEFAULT VALUE]; [ATTRIBUTE DESCRIPTIONS]
 
 Example:
 ```
-<CODE BLOCK>
+[CODE BLOCK]
 ```
-* `<ATTRIBUTE NAME 2>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
+* `[ATTRIBUTE NAME 2]`: [TYPE]; [optional / required]; default: [DEFAULT VALUE]; [ATTRIBUTE DESCRIPTIONS]
 * 
-* * `<ATTRIBUTE NAME n>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
+* * `[ATTRIBUTE NAME n]`: [TYPE]; [optional / required]; default: [DEFAULT VALUE]; [ATTRIBUTE DESCRIPTIONS]
 
 Example:
 ```
