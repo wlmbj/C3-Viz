@@ -1,3 +1,37 @@
+## <WIDGET NAME> ##
+### Overview ###
+<WIDGET DESCTIPTIONS>
+
+### Attributes ###
+* `<ATTRIBUTE NAME 1>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
+
+  * `<SUB ATTRIBUTE NAME 1>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
+  * `<SUB ATTRIBUTE NAME 2>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
+  * 
+  * `<SUB ATTRIBUTE NAME N>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
+
+Example:
+```
+<CODE BLOCK>
+```
+* `<ATTRIBUTE NAME 2>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
+* 
+* * `<ATTRIBUTE NAME n>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
+
+Example:
+```
+"geocoders": [{
+  		"url" : "http://ismaelgis:6080/arcgis/rest/services/LeasesWells/GeocodeServer",
+  		"name": "Leases / Wells Geocoder",
+    	"singleLineFieldName": "SingleKey",
+    	"placeholder": "Find Leases / Wells"
+  	}]
+```
+
+
+# The following is an example #
+-----------------------------------
+
 ## Locator ##
 ### Overview ###
 Add a geographic search box to an application. The widget defaults to the ArcGIS Online World Geocoding Service but can be customized to use one or more ArcGIS Server geocoding services.
