@@ -20,12 +20,7 @@ Example:
 
 Example:
 ```
-"geocoders": [{
-  		"url" : "http://ismaelgis:6080/arcgis/rest/services/LeasesWells/GeocodeServer",
-  		"name": "Leases / Wells Geocoder",
-    	"singleLineFieldName": "SingleKey",
-    	"placeholder": "Find Leases / Wells"
-  	}]
+[CODE BLOCK]
 ```
 
 
