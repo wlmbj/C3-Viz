@@ -10,14 +10,7 @@ Add a geographic search box to an application. The widget defaults to the ArcGIS
   - `placeholder`: Placeholder text that will appear in the input box.
   - `outFields`: An optional list of out fields.
   - `prefix`: Text that will be prepended to the search string. Note that since the text is appended you may need to add a space to the end of your prefix string. For example prefix:" coffee"
-  - `suffix`: Text that will be appended to the search string. Note that since the text is appended you may need to add a space to the beginning of your suffix string. 
-  
-For example suffix:
->
-```
-" Charlotte, NC"
-```
-
+  - `suffix`: Text that will be appended to the search string. Note that since the text is appended you may need to add a space to the beginning of your suffix string. For example suffix:```" Charlotte, NC"```
   - `searchExtent`: Restrict the search to the specified extent.
   - `sourceCountry`: Country code to use for the search. Using a country code can improve location search performance. Specify the sourceCountry using a valid country code from this list.
   - `localSearchOptions`:
