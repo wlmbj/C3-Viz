@@ -27,7 +27,6 @@ Example 1:
 * `autoComplete`: boolean; optional; default: `false`; When false, the geocoder will not display the auto-complete results menu. The default value is false.
 * `autoNavigate`: boolean; optional; default: `true`; When false, the geolocator will not navigate to the result after selection or search.
 * `geocoderMenu`: boolean; optional; default: `false`; When false, the geocoder menu will not be displayed when more than one geocoder is set.
-* 
 * `geocoders`: []; optional; Defines the geocoders that will be used by the Geocoder widget. If `arcgisGeocoder` is true then the `geocoders` will be used alongside the default arcgisGeocoder. When `false`, the default arcgisGeocoder will not be used. Geocoders is an array of objects that define the additional geocoders. Each object includes the name, url to the locator service and the name of the field setup to accept single line input. i.e. 'SingleLineFieldName' or 'SingleLine'. 
 
 Example:
