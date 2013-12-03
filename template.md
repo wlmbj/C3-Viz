@@ -5,28 +5,23 @@ Add a geographic search box to an application. The widget defaults to the ArcGIS
 ### Attributes ###
 * `arcgisGeocoder`: boolean || object; optional; default: `true`; By default, the Locator widget uses the Esri World Locator to find search locations. Disable this locator by setting this property to false. The Esri World Locator can be configured by specifying an object with the following properties:
 
-  * `url`: Url of the geocoder. When undefined the ArcGIS World Geocoder is used.
-  * `name`: Name of the geocoder. If you've specified multiple geocoders this is the name that will appear in the dropdown list.
-  * `placeholder`: Placeholder text that will appear in the input box.
-  * `outFields`: An optional list of out fields.
-  * `prefix`: Text that will be prepended to the search string. Note that since the text is appended you may need to add a space to the end of your prefix string. For example prefix:" coffee"
-  * `suffix`: Text that will be appended to the search string. Note that since the text is appended you may need to add a space to the beginning of your suffix string. For example suffix:```" Charlotte, NC"```
-  * `searchExtent`: Restrict the search to the specified extent.
-  * `sourceCountry`: Country code to use for the search. Using a country code can improve location search performance. Specify the sourceCountry using a valid country code from this list.
+  * `url`: string; optional; default: ;Url of the geocoder. When undefined the ArcGIS World Geocoder is used.
+  * `name`: string; optional; default: ; Name of the geocoder. If you've specified multiple geocoders this is the name that will appear in the dropdown list.
+  * `placeholder`: string; optional; default: ; Placeholder text that will appear in the input box.
+  * `outFields`: string; optional; default: ;An optional list of out fields.
+  * `prefix`: string; optional; default: ;Text that will be prepended to the search string. Note that since the text is appended you may need to add a space to the end of your prefix string. For example prefix:" coffee"
+  * `suffix`: string; optional; default: ;Text that will be appended to the search string. Note that since the text is appended you may need to add a space to the beginning of your suffix string. For example suffix:```" Charlotte, NC"```
+  * `searchExtent`: object; optional; default: ;Restrict the search to the specified extent.
+  * `sourceCountry`: string; optional; default: ;Country code to use for the search. Using a country code can improve location search performance. Specify the sourceCountry using a valid country code from this list.
   * `localSearchOptions`:
-  * `minScale`: Location search will be performed when the map scale is less than the specified value. The default minScale is 15,000.
-  * `distance`: Specify a search distance for the location search. The default value is 12,000 meters.
+  * `minScale`: number; optional; default: ;Location search will be performed when the map scale is less than the specified value. The default minScale is 15,000.
+  * `distance`: number; optional; default: ;Specify a search distance for the location search. The default value is 12,000 meters.
 
 Example 1:
 ```
 "arcgisGeocoder": {
   	    "placeholder": "World address or places"
   	}
-```
-
-Example 2:
-```
-"arcgisGeocoder": false
 ```
 
 * `autoComplete`: boolean; optional; default: `false`; When false, the geocoder will not display the auto-complete results menu. The default value is false.
