@@ -17,6 +17,7 @@ Add a geographic search box to an application. The widget defaults to the ArcGIS
 - localSearchOptions:
 - minScale: Location search will be performed when the map scale is less than the specified value. The default minScale is 15,000.
 - distance: Specify a search distance for the location search. The default value is 12,000 meters.
+
 Example:
 ```
 "arcgisGeocoder": {
