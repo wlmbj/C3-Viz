@@ -4,8 +4,8 @@ Add a geographic search box to an application. The widget defaults to the ArcGIS
 
 ### Attributes ###
 * `arcgisGeocoder` boolean; optional; default: true; By default, the Locator widget uses the Esri World Locator to find search locations. Disable this locator by setting this property to false. The Esri World Locator can be configured by specifying an object with the following properties:
-
->> 
+* 
+>
 - url: Url of the geocoder. When undefined the ArcGIS World Geocoder is used.
 - name: Name of the geocoder. If you've specified multiple geocoders this is the name that will appear in the dropdown list.
 - placeholder: Placeholder text that will appear in the input box.
