@@ -6,7 +6,7 @@ Add a geographic search box to an application. The widget defaults to the ArcGIS
 * `arcgisGeocoder`: boolean; optional; default: true; By default, the Locator widget uses the Esri World Locator to find search locations. Disable this locator by setting this property to false. The Esri World Locator can be configured by specifying an object with the following properties:
 
   - `url`: Url of the geocoder. When undefined the ArcGIS World Geocoder is used.
-  - name: Name of the geocoder. If you've specified multiple geocoders this is the name that will appear in the dropdown list.
+  - `name`: Name of the geocoder. If you've specified multiple geocoders this is the name that will appear in the dropdown list.
   - `placeholder`: Placeholder text that will appear in the input box.
   - `outFields`: An optional list of out fields.
   - `prefix`: Text that will be prepended to the search string. Note that since the text is appended you may need to add a space to the end of your prefix string. For example prefix:" coffee"
@@ -24,7 +24,11 @@ Example:
   	}
 ```
 
-* `geocoders`: []; optional; Defines the geocoders that will be used by the Geocoder widget. If arcgisGeocoder is true then the geocoders will be used alongside the default arcgisGeocoder. When false, the default arcgisGeocoder will not be used. Geocoders is an array of objects that define the additional geocoders. Each object includes the name, url to the locator service and the name of the field setup to accept single line input. i.e. 'SingleLineFieldName' or 'SingleLine'. 
+* `autoComplete`: boolean; optional; default: false; When false, the geocoder will not display the auto-complete results menu. The default value is false.
+* `autoNavigate`: boolean; optional; default: true; When false, the geolocator will not navigate to the result after selection or search.
+* `geocoderMenu`: boolean; optional; default: false; When false, the geocoder menu will not be displayed when more than one geocoder is set.
+* 
+* `geocoders`: []; optional; Defines the geocoders that will be used by the Geocoder widget. If `arcgisGeocoder` is true then the `geocoders` will be used alongside the default arcgisGeocoder. When false, the default arcgisGeocoder will not be used. Geocoders is an array of objects that define the additional geocoders. Each object includes the name, url to the locator service and the name of the field setup to accept single line input. i.e. 'SingleLineFieldName' or 'SingleLine'. 
 
 Example:
 ```
