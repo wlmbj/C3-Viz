@@ -1,6 +1,6 @@
-## <WIDGET NAME> ##
+## [WIDGET NAME[ ##
 ### Overview ###
-<WIDGET DESCTIPTIONS>
+WIDGET DESCTIPTIONS HERE
 
 ### Attributes ###
 * `<ATTRIBUTE NAME 1>`: <TYPE>; <optional / required>; default: <DEFAULT VALUE>; <ATTRIBUTE DESCRIPTIONS>
